@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<!-- this makes application interactable -->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- put all the react elements into body -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+
+    // const h3 = React.createElement("h3", {
+    //     onMouseEnter: () => console.log("Uninstall Gentoo"),
+    //     id: "Title"
+    // }, "Install Gentoo");
+
+    const Title = () => (
+        <h3
+            id="title"
+            onMouseEnter={() => console.log("Uninstall Windows")}
+        >
+            Install Gentoo
+        </h3>
+    );
+
+    // const btn = React.createElement("button", {
+    //     onClick: () => console.log("Install Gentoo"),
+    //     style: {
+    //         backgroundColor: "tomato"
+    //     }
+    // }, "Click me");
+
+    const Button = () => (
+        <button
+            style={{backgroundColor:"tomato"}}
+            onClick={() => console.log("Install Gentoo")}
+        >
+            Click me
+        </button>
+    );
+
+    // const container = React.createElement("div", null, [h3, btn]);
+    // const container = React.createElement("div", null, [Title, Button]);
+    const Container = () => (
+        <div>
+            <Title /> 
+            <Button />
+        </div>
+    );
+    // if tag starts with lowercase, react and jsx will think this is an "html title" tag
+
+    // ReactDOM.render(container, root);
+    ReactDOM.render(<Container />, root);
+</script>
+
+</html>
