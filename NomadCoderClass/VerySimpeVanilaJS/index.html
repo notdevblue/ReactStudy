@@ -10,49 +10,32 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.getElementById("root");
+    
+    function App() {
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () => {
+            // setCounter(counter + 1);
+            // will update the value and trigger rerender
+            //      => this will (counter = 154);
 
-    // const h3 = React.createElement("h3", {
-    //     onMouseEnter: () => console.log("Uninstall Gentoo"),
-    //     id: "Title"
-    // }, "Install Gentoo");
+            setCounter(current => current + 1);
+            // 매개변수로 현재 state 데이터를 주고 return 되는건 새 state 가 됨
+            // 함수를 사용해 현재 state 값을 modify 하는 방법은 안전함
+            // react 가 current 가 확실히 현재 값이라는걸 보장함
+        };
+        console.log("Rendered");
+        console.log(counter);
 
-    const Title = () => (
-        <h3
-            id="title"
-            onMouseEnter={() => console.log("Uninstall Windows")}
-        >
-            Install Gentoo
-        </h3>
-    );
+        return (
+            <div>
+                <h3>Total Clicks: {counter}</h3>
+                <button onClick={onClick}>Click me</button>
+            </div>
+        );
+    };
 
-    // const btn = React.createElement("button", {
-    //     onClick: () => console.log("Install Gentoo"),
-    //     style: {
-    //         backgroundColor: "tomato"
-    //     }
-    // }, "Click me");
+    ReactDOM.render(<App />, root);
 
-    const Button = () => (
-        <button
-            style={{backgroundColor:"tomato"}}
-            onClick={() => console.log("Install Gentoo")}
-        >
-            Click me
-        </button>
-    );
-
-    // const container = React.createElement("div", null, [h3, btn]);
-    // const container = React.createElement("div", null, [Title, Button]);
-    const Container = () => (
-        <div>
-            <Title /> 
-            <Button />
-        </div>
-    );
-    // if tag starts with lowercase, react and jsx will think this is an "html title" tag
-
-    // ReactDOM.render(container, root);
-    ReactDOM.render(<Container />, root);
 </script>
 
 </html>
