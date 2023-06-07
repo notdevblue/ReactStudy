@@ -7,37 +7,60 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    
-    function App() {
-        const [minutes, setMinutes] = React.useState(0);
 
-        const onChange = (event) => setMinutes(event.target.value);
-        const reset = (event) => setMinutes(0);
+    function MinutesToHours() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+
+        const onChange = (event) => setAmount(event.target.value);
+        const onInverted = () => {
+            reset();
+            setInverted(current => !current);
+        } // 함수는 (현제 state 값) => returns 새 state 값
+        const reset = (event) => setAmount(0);
 
         return (
             <div>
-                <h1 className="hi">Super Converter</h1>
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={minutes}
+                        value={inverted ? amount * 60 : amount}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
                         onChange={onChange}
+                        disabled={inverted}
                     />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                        value={Math.round(minutes / 60)}
+                        value={inverted ? amount : Math.round(amount / 60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
-                        disabled
+                        onChange={onChange}
+                        disabled={!inverted}
                     />
                 </div>
                 <button onClick={reset}>reset</button>
+                <button onClick={onInverted}>{inverted ? "Turn back" : "Invert"}</button>
+            </div>
+        );
+    };
+    
+    function KmToMiles() {
+        return (
+            <h3>KM 2 M</h3>
+        );
+    }
+
+    function App() {
+        return (
+            <div>
+                <h1 className="hi">Super Converter</h1>
+                <MinutesToHours />
+                <KmToMiles />
             </div>
         );
     };
